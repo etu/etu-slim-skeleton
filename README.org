@@ -1,0 +1,14 @@
+* Etu's Slim Framework 4 Skeleton Application
+This is an opinionated template for PHP projects using Slim Framework 4 that
+has some care and thought put into error handling and logging.
+
+It comes with the following custom bits:
+ - Custom exceptions that supports something that works like PSR-3 context
+   and specifying the log level for each exception type.
+ - Custom error handler to handle these exceptions and log levels
+ - Custom shutdown handler to log using the error handler
+
+It's built on composer, Slim 4, PHP-DI, Monolog and Slim's PSR-7
+implementation.
+
+It also provides some response helpers to make it easier to write responses.
