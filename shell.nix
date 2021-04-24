@@ -9,6 +9,9 @@ in pkgs.mkShell {
     php'
     php'.packages.composer
 
+    # Install GNU Make for shorthands
+    pkgs.gnumake
+
     # Install docker-compose
     pkgs.docker-compose
   ];
