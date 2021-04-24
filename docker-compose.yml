@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - ${APP_PORT}:80
+    restart: always
+    depends_on:
+      - php
+    volumes:
+      - ./.docker/web/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./app:/app
+
+  php:
+    build: .docker/php
+    restart: always
+    environment:
+      - APP_NAME=${APP_NAME}
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
+    volumes:
+      - ./app:/app
