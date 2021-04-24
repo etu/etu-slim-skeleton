@@ -25,6 +25,13 @@ use App\Helpers\Responses;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Exception\HttpForbiddenException;
+use Slim\Exception\HttpInternalServerErrorException;
+use Slim\Exception\HttpMethodNotAllowedException;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\HttpNotImplementedException;
+use Slim\Exception\HttpUnauthorizedException;
 use Slim\Handlers\ErrorHandler as SlimErrorHandler;
 
 class HttpErrorHandler extends SlimErrorHandler
@@ -51,6 +58,18 @@ class HttpErrorHandler extends SlimErrorHandler
             $trace = $exception->getTrace();
             $line = $exception->getLine();
         }
+
+        // Set status codes based on exception types
+        $statusCode = match (get_class($exception)) {
+            HttpBadRequestException::class => 400,
+            HttpUnauthorizedException::class => 401,
+            HttpForbiddenException::class => 403,
+            HttpNotFoundException::class => 404,
+            HttpMethodNotAllowedException::class => 405,
+            HttpInternalServerErrorException::class => 500,
+            HttpNotImplementedException::class => 501,
+            default => $statusCode,
+        };
 
         // Create a new response
         $response = $this->responseFactory->createResponse();
