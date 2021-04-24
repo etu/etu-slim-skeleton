@@ -18,10 +18,21 @@
  */
 declare(strict_types=1);
 
-use App\Controllers\ExampleController;
-use Slim\App;
-use Slim\Routing\RouteCollectorProxy as Group;
+namespace App\Controllers;
 
-return function (App $app) {
-    $app->get('/', ExampleController::class.':exampleAction');
-};
+use App\Helpers\Responses;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+class ExampleController
+{
+    public function exampleAction(Request $request, Response $response) : Response
+    {
+        $data = [
+            'test' => 'data',
+            'user-agent' => $request->getHeader('User-Agent'),
+        ];
+
+        return Responses::withData($response, $data);
+    }
+}
