@@ -12,3 +12,16 @@ It's built on composer, Slim 4, PHP-DI, Monolog and Slim's PSR-7
 implementation.
 
 It also provides some response helpers to make it easier to write responses.
+
+** Initial set up
+Before running the code you should enter the =app/= directory and run
+=composer install= to have all the required dependencies.
+
+** Running the container
+I've provided the nice shorthand =make run= to run docker-compose to start
+up the environment. This will by default launch a container that listen on
+the following address: http://127.0.0.1:8901/
+
+** Running the tests
+Yet again I have a shorthand for this called =make test= to run tests with
+=phpunit=.
