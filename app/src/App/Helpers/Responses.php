@@ -42,4 +42,25 @@ class Responses
 
         return $response->withHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * Write error to the response body.
+     *
+     * This method prepares the response object to return an response to the client.
+     *
+     * @param ResponseInterface $response Response instance
+     * @param mixed $data Mixed data contents
+     *
+     * @return ResponseInterface
+     */
+    public static function withError(ResponseInterface $response, int $status, $data = null): ResponseInterface
+    {
+        $response->getBody()->write((string) json_encode([
+            'error' => $data,
+        ]));
+
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus($status);
+    }
 }

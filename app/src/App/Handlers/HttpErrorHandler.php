@@ -21,6 +21,7 @@ declare(strict_types=1);
 namespace App\Handlers;
 
 use App\Exceptions\ContextAwareException;
+use App\Helpers\Responses;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -51,24 +52,19 @@ class HttpErrorHandler extends SlimErrorHandler
             $line = $exception->getLine();
         }
 
-        // Set up error response
-        $response = $this->responseFactory->createResponse($statusCode);
+        // Create a new response
+        $response = $this->responseFactory->createResponse();
 
-        // Write out response
-        $response->getBody()->write((string) json_encode([
-            'error' => array_filter([
-                'message' => $this->interpolate($message, array_merge([
-                    'line' => $line,
-                    'statusCode' => $statusCode,
-                ], $context)),
+        return Responses::withError($response, $statusCode, array_filter([
+            'message' => $this->interpolate($message, array_merge([
                 'line' => $line,
                 'statusCode' => $statusCode,
-                'context' => $context,
-                'trace' => $trace,
-            ])
+            ], $context)),
+            'line' => $line,
+            'statusCode' => $statusCode,
+            'context' => $context,
+            'trace' => $trace,
         ]));
-
-        return $response->withHeader('Content-Type', 'application/json');
     }
 
     protected function logError(string $error): void
