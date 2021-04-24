@@ -18,23 +18,13 @@
  */
 declare(strict_types=1);
 
-namespace App\Controllers;
+namespace App\Models;
 
-use App\Helpers\Responses;
-use App\Models\Example;
 use DateTime;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ExampleController
+class Example
 {
-    public function exampleAction(Request $request, Response $response) : Response
-    {
-        $model = new Example();
-        $model->userAgent = $request->getHeader('User-Agent')[0] ?? 'N/A';
-        $model->randomNumber = random_int(1, 6);
-        $model->dateTime = new DateTime();
-
-        return Responses::withData($response, $model);
-    }
+    public string $userAgent;
+    public int $randomNumber;
+    public DateTime $dateTime;
 }
