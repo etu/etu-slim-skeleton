@@ -63,8 +63,7 @@ $app = AppFactory::create();
 $settings = $container->get(SettingsInterface::class);
 
 // Create Request object from globals
-$serverRequestCreator = ServerRequestCreatorFactory::create();
-$request = $serverRequestCreator->createServerRequestFromGlobals();
+$request = ServerRequestCreatorFactory::create()->createServerRequestFromGlobals();
 
 // Create Error Handler
 $errorHandler = new HttpErrorHandler(
@@ -73,22 +72,18 @@ $errorHandler = new HttpErrorHandler(
     $container->get(LoggerInterface::class)
 );
 
-// Create Shutdown Handler
-$shutdownHandler = new ShutdownHandler($request, $errorHandler, $settings->get('displayErrorDetails'));
-register_shutdown_function($shutdownHandler);
+// Register Shutdown Handler
+register_shutdown_function(new ShutdownHandler($request, $errorHandler, $settings->get('displayErrorDetails')));
 
 // Add Routing Middleware
 $app->addRoutingMiddleware();
 
 // Add Error Middleware
-$errorMiddleware = $app->addErrorMiddleware(
+$app->addErrorMiddleware(
     $settings->get('displayErrorDetails'),
     $settings->get('logError'),
     $settings->get('logErrorDetails')
-);
-$errorMiddleware->setDefaultErrorHandler($errorHandler);
+)->setDefaultErrorHandler($errorHandler);
 
 // Run App & Emit Response
-$response = $app->handle($request);
-$responseEmitter = new ResponseEmitter();
-$responseEmitter->emit($response);
+(new ResponseEmitter())->emit($app->handle($request));
