@@ -28,7 +28,7 @@ return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
         SettingsInterface::class => function () {
             return new Settings([
-                'displayErrorDetails' => (getenv('APP_ENV') !== 'production'),
+                'displayErrorDetails' => (getenv('APP_DEBUG') === 'true'),
                 'logError' => true,
                 'logErrorDetails' => true,
                 'logger' => [
