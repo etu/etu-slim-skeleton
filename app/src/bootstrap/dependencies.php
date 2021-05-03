@@ -19,6 +19,7 @@
 declare(strict_types=1);
 
 use App\Settings\SettingsInterface;
+use Bramus\Monolog\Formatter\ColoredLineFormatter;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -35,10 +36,17 @@ return function (ContainerBuilder $containerBuilder) {
             /** @var array $settings */
             $settings = $c->get(SettingsInterface::class)->get('logger');
 
+            // Set up logger
             $logger = new Logger($settings['name']);
             $logger->pushProcessor(new UidProcessor());
             $logger->pushProcessor(new PsrLogMessageProcessor());
-            $logger->pushHandler(new StreamHandler($settings['path'], $settings['level']));
+
+            // Set up output stream
+            $handler = new StreamHandler($settings['path'], $settings['level']);
+            $handler->setFormatter(new ColoredLineFormatter());
+
+            $logger->pushHandler($handler);
+
 
             return $logger;
         },
