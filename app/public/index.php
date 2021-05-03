@@ -30,6 +30,9 @@ use Slim\ResponseEmitter;
 // Hide PHP error output
 ini_set('display_errors', '0');
 
+// Start output buffering to be able to control the output in the shutdown handler
+ob_start();
+
 require_once(__DIR__ . '/../vendor/autoload.php');
 
 // Set up PHP-DI

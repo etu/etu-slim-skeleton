@@ -79,6 +79,9 @@ class ShutdownHandler
                 true
             );
 
+            // Clean eventual output before we emit the response to not have broken json
+            ob_clean();
+
             $responseEmitter = new ResponseEmitter();
             $responseEmitter->emit($response);
         }
