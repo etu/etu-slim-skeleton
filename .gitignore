@@ -1,2 +1,5 @@
 # Ignore composer vendor directory
 app/vendor/
+
+# Ignore eventual cache directory
+app/cache/
