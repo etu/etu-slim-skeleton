@@ -21,6 +21,7 @@ declare(strict_types=1);
 namespace App\Handlers;
 
 use App\Exceptions\InternalServerErrorException;
+use App\Exceptions\OutOfMemoryException;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\ResponseEmitter;
 
@@ -56,7 +57,14 @@ class ShutdownHandler
                 };
             }
 
-            $exception = new InternalServerErrorException($message, [
+            // Select exception type by message
+            $exceptionType = match (true) {
+                (strpos($error['message'], 'Allowed memory size of') !== false) => OutOfMemoryException::class,
+                default => InternalServerErrorException::class,
+            };
+
+            // Create error exception for logging
+            $exception = new $exceptionType($message, [
                 'errorMessage' => $error['message'],
                 'errorLine' => $error['line'],
                 'errorFile' => $error['file'],
