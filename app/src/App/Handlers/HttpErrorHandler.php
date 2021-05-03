@@ -87,6 +87,7 @@ class HttpErrorHandler extends SlimErrorHandler
             ], $context)),
             'line' => $line,
             'statusCode' => $statusCode,
+            'exception' => $this->displayErrorDetails ? get_class($exception) : null,
             'context' => $context,
             'trace' => $trace,
         ]));
