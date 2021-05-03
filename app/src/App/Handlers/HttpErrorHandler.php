@@ -48,6 +48,7 @@ class HttpErrorHandler extends SlimErrorHandler
 
         $message = $exception->getMessage();
         $line = null;
+        $file = null;
         $context = [];
         $statusCode = 500;
         $trace = [];
@@ -63,6 +64,7 @@ class HttpErrorHandler extends SlimErrorHandler
         if ($this->displayErrorDetails) {
             $trace = $exception->getTrace();
             $line = $exception->getLine();
+            $file = $exception->getFile();
         }
 
         // Set status codes based on exception types
@@ -86,6 +88,7 @@ class HttpErrorHandler extends SlimErrorHandler
                 'statusCode' => $statusCode,
             ], $context)),
             'line' => $line,
+            'file' => $file,
             'statusCode' => $statusCode,
             'exception' => $this->displayErrorDetails ? get_class($exception) : null,
             'context' => $context,
