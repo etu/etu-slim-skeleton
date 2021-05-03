@@ -28,7 +28,6 @@ use App\Helpers\Responses;
 use DivisionByZeroError;
 use Error;
 use Monolog\Logger;
-use Monolog\Processor\PsrLogMessageProcessor;
 use ParseError;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
@@ -47,11 +46,8 @@ class HttpErrorHandler extends SlimErrorHandler
         $exception = $this->replaceException($this->exception);
 
         $message = $exception->getMessage();
-        $line = null;
-        $file = null;
         $context = [];
         $statusCode = 500;
-        $trace = [];
 
         if ($exception instanceof ContextAwareException) {
             $statusCode = $exception->getCode();
@@ -59,12 +55,6 @@ class HttpErrorHandler extends SlimErrorHandler
             if ($this->displayErrorDetails) {
                 $context = $exception->getContext();
             }
-        }
-
-        if ($this->displayErrorDetails) {
-            $trace = $exception->getTrace();
-            $line = $exception->getLine();
-            $file = $exception->getFile();
         }
 
         // Set status codes based on exception types
@@ -83,16 +73,8 @@ class HttpErrorHandler extends SlimErrorHandler
         $response = $this->responseFactory->createResponse();
 
         return Responses::withError($response, $statusCode, array_filter([
-            'message' => $this->interpolate($message, array_merge([
-                'line' => $line,
-                'statusCode' => $statusCode,
-            ], $context)),
-            'line' => $line,
-            'file' => $file,
-            'statusCode' => $statusCode,
-            'exception' => $this->displayErrorDetails ? get_class($exception) : null,
+            'message' => $message,
             'context' => $context,
-            'trace' => $trace,
         ]));
     }
 
@@ -109,15 +91,6 @@ class HttpErrorHandler extends SlimErrorHandler
         }
 
         $this->logger->log($logLevel, $exception->getMessage(), $context);
-    }
-
-    protected function interpolate(string $message, array $context = []) : string
-    {
-        // Borrow the PSR-3 log message processor from composer to interpolate string context.
-        return (new PsrLogMessageProcessor())([
-            'message' => $message,
-            'context' => $context,
-        ])['message'];
     }
 
     protected function replaceException(object $exception) : object

@@ -22,6 +22,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Monolog\Logger;
+use Monolog\Processor\PsrLogMessageProcessor;
 use Throwable;
 
 abstract class ContextAwareException extends Exception
@@ -36,15 +37,31 @@ abstract class ContextAwareException extends Exception
         array $context = [],
         ?Throwable $previous = null
     ) {
-        $this->context = $context;
-        $this->logLevel = $logLevel;
+        $processed = (new PsrLogMessageProcessor())([
+            'message' => $message,
+            'context' => $context,
+        ]);
 
-        parent::__construct($message, $code, $previous);
+        $this->logLevel = $logLevel;
+        $this->context = $processed['context'];
+
+        parent::__construct($processed['message'], $code, $previous);
     }
 
     public function getContext() : array
     {
-        return $this->context;
+        $context = [
+            'php_line' => $this->getLine(),
+            'php_file' => $this->getFile(),
+            'php_exception' => get_class($this),
+            'php_trace' => $this->getTraceAsString(),
+        ];
+
+        foreach ($this->context as $key => $value) {
+            $context[$key] = $value;
+        }
+
+        return $context;
     }
 
     public function getLogLevel() : int
