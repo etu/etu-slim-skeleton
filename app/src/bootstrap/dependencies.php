@@ -18,6 +18,8 @@
  */
 declare(strict_types=1);
 
+use App\Controllers\ErrorController;
+use App\Controllers\ExampleController;
 use App\Settings\SettingsInterface;
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
 use DI\ContainerBuilder;
@@ -50,5 +52,8 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
+
+        ExampleController::class => autowire(),
+        ErrorController::class => autowire(),
     ]);
 };
