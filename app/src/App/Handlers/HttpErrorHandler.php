@@ -95,13 +95,11 @@ class HttpErrorHandler extends SlimErrorHandler
 
     protected function replaceException(object $exception) : object
     {
-        $exceptionType = match (get_class($exception)) {
-            DivisionByZeroError::class => DivisionByZeroException::class,
-            ParseError::class => ParseException::class,
-            Error::class => InternalServerErrorException::class,
-            default => get_class($exception),
+        return match (get_class($exception)) {
+            DivisionByZeroError::class => new DivisionByZeroException($exception->getMessage(), [], $exception),
+            ParseError::class => new ParseException($exception->getMessage(), [], $exception),
+            Error::class => new InternalServerErrorException($exception->getMessage(), [], $exception),
+            default => $exception,
         };
-
-        return new $exceptionType($exception->getMessage(), [], $exception);
     }
 }
