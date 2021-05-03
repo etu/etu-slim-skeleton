@@ -22,9 +22,11 @@ namespace App\Handlers;
 
 use App\Exceptions\ContextAwareException;
 use App\Exceptions\DivisionByZeroException;
+use App\Exceptions\InternalServerErrorException;
 use App\Exceptions\ParseException;
 use App\Helpers\Responses;
 use DivisionByZeroError;
+use Error;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use ParseError;
@@ -119,6 +121,7 @@ class HttpErrorHandler extends SlimErrorHandler
         return match (get_class($exception)) {
             DivisionByZeroError::class => new DivisionByZeroException($exception->getMessage(), [], $exception),
             ParseError::class => new ParseException($exception->getMessage(), [], $exception),
+            Error::class => new InternalServerErrorException($exception->getMessage(), [], $exception),
             default => $exception,
         };
     }
