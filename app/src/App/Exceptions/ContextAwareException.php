@@ -51,8 +51,8 @@ abstract class ContextAwareException extends Exception
     public function getContext() : array
     {
         $context = [
-            'php_line' => $this->getLine(),
-            'php_file' => $this->getFile(),
+            'php_line' => $this->context['errorLine'] ?? $this->getLine(),
+            'php_file' => $this->context['errorFile'] ?? $this->getFile(),
             'php_exception' => get_class($this),
             'php_trace' => $this->getTraceAsString(),
         ];
