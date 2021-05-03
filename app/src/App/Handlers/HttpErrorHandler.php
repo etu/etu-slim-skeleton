@@ -21,7 +21,9 @@ declare(strict_types=1);
 namespace App\Handlers;
 
 use App\Exceptions\ContextAwareException;
+use App\Exceptions\DivisionByZeroException;
 use App\Helpers\Responses;
+use DivisionByZeroError;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -38,7 +40,7 @@ class HttpErrorHandler extends SlimErrorHandler
 {
     protected function respond() : Response
     {
-        $exception = $this->exception;
+        $exception = $this->replaceException($this->exception);
 
         $message = $exception->getMessage();
         $line = null;
@@ -88,7 +90,7 @@ class HttpErrorHandler extends SlimErrorHandler
 
     protected function logError(string $error): void
     {
-        $exception = $this->exception;
+        $exception = $this->replaceException($this->exception);
 
         $context = [];
         $logLevel = Logger::ERROR;
@@ -108,5 +110,13 @@ class HttpErrorHandler extends SlimErrorHandler
             'message' => $message,
             'context' => $context,
         ])['message'];
+    }
+
+    protected function replaceException(object $exception) : object
+    {
+        return match (get_class($exception)) {
+            DivisionByZeroError::class => new DivisionByZeroException($exception->getMessage(), [], $exception),
+            default => $exception,
+        };
     }
 }
