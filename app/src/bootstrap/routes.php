@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 use App\Controllers\ErrorController;
@@ -24,12 +26,12 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy as Group;
 
 return function (App $app) {
-    $app->get('/', ExampleController::class.':exampleAction');
+    $app->get('/', ExampleController::class . ':exampleAction');
 
     // These are routes that tries out different error scenarios that the error handler can manage.
-    $app->get('/error/divisionByZero', ErrorController::class.':divisionByZeroAction');
-    $app->get('/error/outOfMemory', ErrorController::class.':outOfMemoryAction');
-    $app->get('/error/syntaxError', ErrorController::class.':syntaxErrorAction');
-    $app->get('/error/undefinedFunction', ErrorController::class.':undefinedFunctionAction');
-    $app->get('/error/undefinedClass', ErrorController::class.':undefinedClassAction');
+    $app->get('/error/divisionByZero', ErrorController::class . ':divisionByZeroAction');
+    $app->get('/error/outOfMemory', ErrorController::class . ':outOfMemoryAction');
+    $app->get('/error/syntaxError', ErrorController::class . ':syntaxErrorAction');
+    $app->get('/error/undefinedFunction', ErrorController::class . ':undefinedFunctionAction');
+    $app->get('/error/undefinedClass', ErrorController::class . ':undefinedClassAction');
 };

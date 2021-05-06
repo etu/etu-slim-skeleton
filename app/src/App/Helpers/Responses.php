@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace App\Helpers;
@@ -34,7 +36,7 @@ class Responses
      *
      * @return ResponseInterface
      */
-    public static function withData(ResponseInterface $response, $data = null) : ResponseInterface
+    public static function withData(ResponseInterface $response, $data = null): ResponseInterface
     {
         $response->getBody()->write((string) json_encode([
             'results' => $data,

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace App\Handlers;
@@ -41,7 +43,7 @@ use Slim\Handlers\ErrorHandler as SlimErrorHandler;
 
 class HttpErrorHandler extends SlimErrorHandler
 {
-    protected function respond() : Response
+    protected function respond(): Response
     {
         $exception = $this->replaceException($this->exception);
 
@@ -93,7 +95,7 @@ class HttpErrorHandler extends SlimErrorHandler
         $this->logger->log($logLevel, $exception->getMessage(), $context);
     }
 
-    protected function replaceException(object $exception) : object
+    protected function replaceException(object $exception): object
     {
         return match (get_class($exception)) {
             DivisionByZeroError::class => new DivisionByZeroException($exception->getMessage(), [], $exception),

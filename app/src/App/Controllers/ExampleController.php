@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
@@ -28,7 +30,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ExampleController
 {
-    public function exampleAction(Request $request, Response $response) : Response
+    public function exampleAction(Request $request, Response $response): Response
     {
         $model = new Example();
         $model->userAgent = $request->getHeader('User-Agent')[0] ?? 'N/A';

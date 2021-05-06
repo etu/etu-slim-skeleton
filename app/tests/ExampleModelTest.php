@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace Tests;
@@ -25,7 +27,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ExampleModelTest extends TestCase
 {
-    public function testCanCreateModel() : void
+    public function testCanCreateModel(): void
     {
         $this->assertInstanceOf(
             Example::class,
@@ -33,7 +35,7 @@ final class ExampleModelTest extends TestCase
         );
     }
 
-    public function testRandomNumberWithinRange() : void
+    public function testRandomNumberWithinRange(): void
     {
         $model = new Example();
         $model->randomNumber = 47;

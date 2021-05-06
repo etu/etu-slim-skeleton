@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 use App\Handlers\HttpErrorHandler;
@@ -40,14 +42,14 @@ $containerBuilder = new ContainerBuilder();
 
 // Enable PHP-DI cache on production
 if (getenv('APP_ENV') !== 'local') {
-    $containerBuilder->enableCompilation(__DIR__.'/../cache/');
+    $containerBuilder->enableCompilation(__DIR__ . '/../cache/');
 }
 
 // Load settings
-(require_once(__DIR__.'/../src/bootstrap/settings.php'))($containerBuilder);
+(require_once(__DIR__ . '/../src/bootstrap/settings.php'))($containerBuilder);
 
 // Load dependencies
-(require_once(__DIR__.'/../src/bootstrap/dependencies.php'))($containerBuilder);
+(require_once(__DIR__ . '/../src/bootstrap/dependencies.php'))($containerBuilder);
 
 // Build PHP-DI container instance
 $container = $containerBuilder->build();
@@ -57,10 +59,10 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 // Register midlewares
-(require_once(__DIR__.'/../src/bootstrap/middlewares.php'))($app);
+(require_once(__DIR__ . '/../src/bootstrap/middlewares.php'))($app);
 
 // Register routes
-(require_once(__DIR__.'/../src/bootstrap/routes.php'))($app);
+(require_once(__DIR__ . '/../src/bootstrap/routes.php'))($app);
 
 /** @var SettingsInterface $settings */
 $settings = $container->get(SettingsInterface::class);

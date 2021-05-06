@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace App\Exceptions;
@@ -48,7 +50,7 @@ abstract class ContextAwareException extends Exception
         parent::__construct($processed['message'], $code, $previous);
     }
 
-    public function getContext() : array
+    public function getContext(): array
     {
         $context = [
             'php_line' => $this->context['errorLine'] ?? $this->getLine(),
@@ -64,7 +66,7 @@ abstract class ContextAwareException extends Exception
         return $context;
     }
 
-    public function getLogLevel() : int
+    public function getLogLevel(): int
     {
         return $this->logLevel;
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Etu's Slim Framework 4 Skeleton Application.
  *
@@ -16,6 +17,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
@@ -26,35 +28,35 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ErrorController
 {
-    public function divisionByZeroAction(Request $request, Response $response) : Response
+    public function divisionByZeroAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
             'divisionByZero' => 47 / 0,
         ]);
     }
 
-    public function outOfMemoryAction(Request $request, Response $response) : Response
+    public function outOfMemoryAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
             'outOfMemory' => str_repeat('a', PHP_INT_MAX),
         ]);
     }
 
-    public function syntaxErrorAction(Request $request, Response $response) : Response
+    public function syntaxErrorAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
             'syntaxError' => eval('::'),
         ]);
     }
 
-    public function undefinedFunctionAction(Request $request, Response $response) : Response
+    public function undefinedFunctionAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
             'undefinedFunction' => callToUndefinedFunction(),
         ]);
     }
 
-    public function undefinedClassAction(Request $request, Response $response) : Response
+    public function undefinedClassAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
             'undefinedClass' => new UndefinedClass(),
