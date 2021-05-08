@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-use App\Handlers\HttpErrorHandler;
-use App\Handlers\ShutdownHandler;
-use App\Settings\SettingsInterface;
 use DI\ContainerBuilder;
+use Etu\Slim\Handlers\HttpErrorHandler;
+use Etu\Slim\Handlers\ShutdownHandler;
+use Etu\Slim\Settings\SettingsInterface;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;

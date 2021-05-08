@@ -22,9 +22,9 @@ declare(strict_types=1);
 
 use App\Controllers\ErrorController;
 use App\Controllers\ExampleController;
-use App\Settings\SettingsInterface;
 use Bramus\Monolog\Formatter\ColoredLineFormatter;
 use DI\ContainerBuilder;
+use Etu\Slim\Settings\SettingsInterface;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
@@ -48,9 +48,7 @@ return function (ContainerBuilder $containerBuilder) {
             // Set up output stream
             $handler = new StreamHandler($settings['path'], $settings['level']);
             $handler->setFormatter(new ColoredLineFormatter());
-
             $logger->pushHandler($handler);
-
 
             return $logger;
         },

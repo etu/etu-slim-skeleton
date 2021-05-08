@@ -13,6 +13,8 @@ implementation.
 
 It also provides some response helpers to make it easier to write responses.
 
+It's built on my library: https://github.com/etu/etu-slim-libs
+
 ** Initial set up
 Before running the code you should enter the =app/= directory and run
 =composer install= to have all the required dependencies.

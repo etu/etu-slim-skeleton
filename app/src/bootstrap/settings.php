@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-use App\Settings\Settings;
-use App\Settings\SettingsInterface;
 use DI\ContainerBuilder;
-use Monolog\Logger;
+use Etu\Slim\Settings\Settings;
+use Etu\Slim\Settings\SettingsInterface;
+use Psr\Log\LogLevel;
 
 return function (ContainerBuilder $containerBuilder) {
     // Global settings object
@@ -36,7 +36,7 @@ return function (ContainerBuilder $containerBuilder) {
                 'logger' => [
                     'name' => getenv('APP_NAME'),
                     'path' => 'php://stdout',
-                    'level' => Logger::DEBUG,
+                    'level' => LogLevel::DEBUG,
                 ],
             ]);
         }
