@@ -14,5 +14,8 @@ in pkgs.mkShell {
 
     # Install docker-compose
     pkgs.docker-compose
+
+    # Install nodejs for PHP LSP
+    pkgs.nodejs
   ];
 }
