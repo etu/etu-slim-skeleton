@@ -36,7 +36,7 @@ use function DI\autowire;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
-        LoggerInterface::class => function (ContainerInterface $c) {
+        LoggerInterface::class => function (ContainerInterface $c): Logger {
             /** @var array $settings */
             $settings = $c->get(SettingsInterface::class)->get('logger');
 
