@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "etu/slim-libs": "^0.0.3",
+        "etu/slim-libs": "^0.0.4",
         "php-di/php-di": "^6.3",
         "bramus/monolog-colored-line-formatter": "^3.0"
     },

@@ -20,8 +20,9 @@
 
 declare(strict_types=1);
 
+use Etu\Slim\Middlewares\JsonBodyParserMiddleware;
 use Slim\App;
 
 return function (App $app) {
-    // $app->add(Middleware::class);
+    $app->add(JsonBodyParserMiddleware::class);
 };
