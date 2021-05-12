@@ -9,8 +9,15 @@ in pkgs.mkShell {
     php'
     php'.packages.composer
 
+    # Install code style tools
+    php'.packages.phpcbf
+    php'.packages.phpcs
+
     # Install GNU Make for shorthands
     pkgs.gnumake
+
+    # Install yaml lint
+    pkgs.yamllint
 
     # Install docker-compose
     pkgs.docker-compose
