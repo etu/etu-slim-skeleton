@@ -17,4 +17,4 @@ security-advisories:
 	cd app && composer require --dev "roave/security-advisories:dev-latest"
 
 yamllint:
-	yamllint -s -f github .github/workflows/*.yml
+	yamllint -s -f github docker-compose.yml .github/workflows/*.yml
