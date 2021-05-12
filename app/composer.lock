@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69864ef3339101d65a7227112a14939b",
+    "content-hash": "a1e1e454bb07681c86da8b6af83e753f",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -98,16 +98,16 @@
         },
         {
             "name": "etu/slim-libs",
-            "version": "0.0.4",
+            "version": "0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etu/etu-slim-libs.git",
-                "reference": "86555b5e5d6f9f40a3131d7da2940ded8a329574"
+                "reference": "d17357682ea40ae189b5a190f035dcfcee8f2422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etu/etu-slim-libs/zipball/86555b5e5d6f9f40a3131d7da2940ded8a329574",
-                "reference": "86555b5e5d6f9f40a3131d7da2940ded8a329574",
+                "url": "https://api.github.com/repos/etu/etu-slim-libs/zipball/d17357682ea40ae189b5a190f035dcfcee8f2422",
+                "reference": "d17357682ea40ae189b5a190f035dcfcee8f2422",
                 "shasum": ""
             },
             "require": {
@@ -140,9 +140,9 @@
             "homepage": "https://github.com/etu/etu-slim-libs",
             "support": {
                 "issues": "https://github.com/etu/etu-slim-libs/issues",
-                "source": "https://github.com/etu/etu-slim-libs/tree/0.0.4"
+                "source": "https://github.com/etu/etu-slim-libs/tree/0.0.7"
             },
-            "time": "2021-05-09T14:31:20+00:00"
+            "time": "2021-05-12T19:07:27+00:00"
         },
         {
             "name": "fig/http-message-util",
