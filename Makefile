@@ -13,6 +13,9 @@ phpcbf:
 phpcs:
 	phpcs --standard=PSR12 app/public/ app/src/ app/tests/
 
+phpstan:
+	cd app && phpstan analyze --level 8 public/ src/ tests/
+
 security-advisories:
 	cd app && composer require --dev "roave/security-advisories:dev-latest"
 

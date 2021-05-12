@@ -13,6 +13,9 @@ in pkgs.mkShell {
     php'.packages.phpcbf
     php'.packages.phpcs
 
+    # Install phpstan
+    php'.packages.phpstan
+
     # Install GNU Make for shorthands
     pkgs.gnumake
 
