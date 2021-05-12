@@ -31,7 +31,7 @@ class ErrorController
     public function divisionByZeroAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
-            'divisionByZero' => 47 / 0,
+            'divisionByZero' => eval('47 / 0'),
         ]);
     }
 
@@ -52,14 +52,14 @@ class ErrorController
     public function undefinedFunctionAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
-            'undefinedFunction' => callToUndefinedFunction(),
+            'undefinedFunction' => eval('callToUndefinedFunction()'),
         ]);
     }
 
     public function undefinedClassAction(Request $request, Response $response): Response
     {
         return Responses::withData($response, [
-            'undefinedClass' => new UndefinedClass(),
+            'undefinedClass' => eval('new UndefinedClass()'),
         ]);
     }
 }
