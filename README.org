@@ -1,3 +1,6 @@
+[[https://github.com/etu/etu-slim-skeleton/actions/workflows/codestyle.yml][https://github.com/etu/etu-slim-skeleton/actions/workflows/codestyle.yml/badge.svg]]
+[[https://github.com/etu/etu-slim-skeleton/actions/workflows/composer.yml][https://github.com/etu/etu-slim-skeleton/actions/workflows/composer.yml/badge.svg]]
+
 * Etu's Slim Framework 4 Skeleton Application
 This is an opinionated template for PHP projects using Slim Framework 4 that
 has some care and thought put into error handling and logging.
