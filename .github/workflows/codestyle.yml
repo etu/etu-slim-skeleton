@@ -13,7 +13,7 @@ name: Codestyle checks
 jobs:
   phpcs:
     name: Run PHP Codesniffer style checks for PSR12
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -28,7 +28,7 @@ jobs:
 
   phpstan:
     name: Run phpstan style checks
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -44,7 +44,7 @@ jobs:
 
   yamllint:
     name: Run yamllint on github actions files
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
 
