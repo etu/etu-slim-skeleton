@@ -15,7 +15,7 @@ jobs:
     name: Validate composer dependencies
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@v3.6.0
 
       - uses: cachix/install-nix-action@v22
         with:
@@ -30,7 +30,7 @@ jobs:
     name: Check deps against Roave Security Advisories
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@v3.6.0
 
       - uses: cachix/install-nix-action@v22
         with:
