@@ -15,7 +15,7 @@ jobs:
     name: Run PHP Codesniffer style checks for PSR12
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
 
       - uses: cachix/install-nix-action@v23
         with:
@@ -30,7 +30,7 @@ jobs:
     name: Run phpstan style checks
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
 
       - uses: cachix/install-nix-action@v23
         with:
@@ -46,7 +46,7 @@ jobs:
     name: Run yamllint on github actions files
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
 
       - uses: cachix/install-nix-action@v23
         with:
